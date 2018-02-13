@@ -75,7 +75,13 @@ testimonials$text %<>% as.character
 ## Extract Direct quotes from Survivors 
 testimonials$text2 = ifelse ( grepl("\U201C", testimonials$text) & !grepl( "\U201D", testimonials$text), paste0(testimonials$text,"\U201D" ), testimonials$text ) 
 
-quotes = rm_between(testimonials$text2, "\U201C", "\U201D", extract=TRUE) 
+testimonials$text2 %<>% gsub ("\U201C" , "\"" , .) %>%
+                         gsub ("\U201D", "\"" , .)
+
+#quotes = rm_between(testimonials$text2, "\U201C", "\U201D", extract=TRUE) 
+
+quotes = rm_between(testimonials$text2, "\"", "\"", extract=TRUE) 
+
 
 for ( i in 1:length(quotes) ) {
   
