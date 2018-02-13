@@ -25,10 +25,10 @@ conv_fun <- function (x) iconv (x, "latin1", "ASCII", "")
 
 testimonials$clean_quote <-  testimonials$quote %>% 
      conv_fun %>%
+     str_replace_all( "https?[[:punct:][:alnum:]]*", " ") %>%
      gsub ( "<a href=.*>", "", .) %>%
      gsub("[[:digit:]]", " ", .) %>%
      gsub ("\'t", "t" ,.) %>%
-     str_replace_all( "https?[[:punct:][:alnum:]]*", " ") %>%
      gsub("[[:punct:]]", " ", .) %>%
      gsub ( "\\s{2,}" , " ", . ) %>% #reduce repeating spaces to single space
      gsub ("^\\s|\\s$" , "", .)
